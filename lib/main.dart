@@ -15,11 +15,11 @@ Future<void> main() async {
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getTemporaryDirectory(),
   );
-  runApp(const MyApp());
+  runApp(const CalculatorScreen());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CalculatorScreen extends StatelessWidget {
+  const CalculatorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,8 @@ class MyApp extends StatelessWidget {
 
           return MaterialApp(
             theme: AppTheme.light,
-            darkTheme: AppTheme.dark,
-            themeMode: themeMode,
+            // darkTheme: AppTheme.dark,
+            // themeMode: themeMode,
             debugShowCheckedModeBanner: false,
             title: Config.appName,
             onGenerateRoute: AppRouter().onGenerateRoute,
