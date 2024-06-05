@@ -2,6 +2,7 @@ import 'package:calculator/data/models/calculation.dart';
 import 'package:calculator/helpers/utils.dart';
 import 'package:calculator/logic/cubits/history/history_cubit.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:math_expressions/math_expressions.dart';
 
@@ -16,6 +17,12 @@ class CalculationCubit extends Cubit<CalculationState> {
     this.onClickEqual,
   })  : _historyCubit = historyCubit,
         super(const CalculationState());
+
+  void clickBtnToPaymentPage() {
+    if (onClickEqual != null) {
+      onClickEqual!(state.answer);
+    }
+  }
 
   void onAdd(String value) {
     try {
@@ -252,9 +259,9 @@ class CalculationCubit extends Cubit<CalculationState> {
         answer: result,
       ));
       emit(state.copyWith(answer: result));
-      if (onClickEqual != null) {
-        onClickEqual!(result);
-      }
+      // if (onClickEqual != null) {
+      //   onClickEqual!(result);
+      // }
     } catch (e) {
       emit(state.copyWith(isError: true, error: 'Invalid format used.'));
     }

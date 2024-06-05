@@ -4,6 +4,7 @@ import 'package:calculator/logic/cubits/calculation/calculation_cubit.dart';
 import 'package:calculator/logic/cubits/history/history_cubit.dart';
 import 'package:calculator/logic/cubits/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ButtonModel {
@@ -153,30 +154,30 @@ class _MainScreenState extends State<MainScreen> {
                               ),
                             ),
                           ),
-                          if (answer != null)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 22.0),
-                              child: SelectableText.rich(
-                                TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: '=',
-                                      style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: Utils.formatAmount(
-                                          answer.toString().length > 15
-                                              ? answer.toStringAsExponential(8)
-                                              : answer.toString()),
-                                    ),
-                                  ],
-                                ),
-                                textAlign: TextAlign.end,
-                                style: const TextStyle(fontSize: 32.0),
-                              ),
-                            ),
+                          // if (answer != null)
+                          //   Padding(
+                          //     padding: const EdgeInsets.only(top: 22.0),
+                          //     child: SelectableText.rich(
+                          //       TextSpan(
+                          //         children: [
+                          //           TextSpan(
+                          //             text: '=',
+                          //             style: TextStyle(
+                          //               color: Theme.of(context).primaryColor,
+                          //             ),
+                          //           ),
+                          //           TextSpan(
+                          //             text: Utils.formatAmount(
+                          //                 answer.toString().length > 15
+                          //                     ? answer.toStringAsExponential(8)
+                          //                     : answer.toString()),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //       textAlign: TextAlign.end,
+                          //       style: const TextStyle(fontSize: 32.0),
+                          //     ),
+                          //   ),
                         ],
                       ),
                     ),
@@ -189,33 +190,46 @@ class _MainScreenState extends State<MainScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Tooltip(
-                                    message: 'History',
-                                    child: IconButton(
-                                      splashRadius: 20.0,
-                                      onPressed: histories.isEmpty
-                                          ? null
-                                          : _showHistory,
-                                      icon: Icon(
-                                        _isHistoryVisible
-                                            ? Icons.calculate
-                                            : Icons.history,
-                                      ),
-                                    ),
-                                  ),
-                                  // Tooltip(
-                                  //   message: 'Switch Theme',
-                                  //   child: IconButton(
-                                  //     splashRadius: 20.0,
-                                  //     onPressed: _setTheme,
-                                  //     icon: Icon(themeIcon),
-                                  //   ),
-                                  // ),
-                                ],
+                            Tooltip(
+                              message: 'History',
+                              child: IconButton(
+                                splashRadius: 20.0,
+                                onPressed:
+                                    histories.isEmpty ? null : _showHistory,
+                                icon: Icon(
+                                  _isHistoryVisible
+                                      ? Icons.calculate
+                                      : Icons.history,
+                                ),
                               ),
+                            ),
+                            Expanded(
+                              child: answer == null
+                                  ? const SizedBox()
+                                  : SelectableText.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: '=',
+                                            style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: Utils.formatAmount(answer
+                                                        .toString()
+                                                        .length >
+                                                    15
+                                                ? answer
+                                                    .toStringAsExponential(8)
+                                                : answer.toString()),
+                                          ),
+                                        ],
+                                      ),
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(fontSize: 32.0),
+                                    ),
                             ),
                             Tooltip(
                               message: 'Delete',
@@ -259,20 +273,44 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ],
                       ),
+                      GestureDetector(
+                        onTap: answer == null || answer <= 0
+                            ? null
+                            : () {
+                                context
+                                    .read<CalculationCubit>()
+                                    .clickBtnToPaymentPage();
+                                Navigator.pop(context);
+                              },
+                        child: Container(
+                          color: answer == null || answer <= 0
+                              ? const Color.fromARGB(255, 16, 71, 17)
+                                  .withOpacity(.3)
+                              : Colors.green,
+                          height: 60,
+                          alignment: AlignmentDirectional.center,
+                          child: const Text(
+                            "Proceed to payment page",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
               ),
               Align(
                 alignment: AlignmentDirectional.topStart,
-                
                 child: IconButton(
-                  padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon:
-                        const Icon(Icons.arrow_back, color: Colors.black, size: 30)),
+                    icon: const Icon(Icons.arrow_back,
+                        color: Colors.black, size: 30)),
               ),
             ],
           ),
