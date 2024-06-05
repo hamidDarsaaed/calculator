@@ -35,6 +35,6 @@ flutter_gen:
   output: lib/helpers
 
 flutter:
-  assets:
-    - assets/images/
+  # assets:
+  #   - assets/images/
   uses-material-design: true

@@ -3,7 +3,6 @@ import 'package:calculator/helpers/utils.dart';
 import 'package:calculator/logic/cubits/calculation/calculation_cubit.dart';
 import 'package:calculator/logic/cubits/history/history_cubit.dart';
 import 'package:calculator/logic/cubits/theme/theme_cubit.dart';
-import 'package:calculator/presentation/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -204,23 +203,15 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                                 ),
                               ),
-                              Tooltip(
-                                message: 'Switch Theme',
-                                child: IconButton(
-                                  splashRadius: 20.0,
-                                  onPressed: _setTheme,
-                                  icon: Icon(themeIcon),
-                                ),
-                              ),
-                              Tooltip(
-                                message: 'Profile',
-                                child: IconButton(
-                                  splashRadius: 20.0,
-                                  onPressed: () => Navigator.of(context)
-                                      .pushNamed(ProfileScreen.routeName),
-                                  icon: const Icon(Icons.person_outline),
-                                ),
-                              ),
+                              // Tooltip(
+                              //   message: 'Switch Theme',
+                              //   child: IconButton(
+                              //     splashRadius: 20.0,
+                              //     onPressed: _setTheme,
+                              //     icon: Icon(themeIcon),
+                              //   ),
+                              // ),
+                          
                             ],
                           ),
                         ),

@@ -9,9 +9,12 @@ part 'calculation_state.dart';
 
 class CalculationCubit extends Cubit<CalculationState> {
   final HistoryCubit _historyCubit;
+  Function(num?)? onClickEqual;
 
-  CalculationCubit({required HistoryCubit historyCubit})
-      : _historyCubit = historyCubit,
+  CalculationCubit({
+    required HistoryCubit historyCubit,
+    this.onClickEqual,
+  })  : _historyCubit = historyCubit,
         super(const CalculationState());
 
   void onAdd(String value) {
@@ -249,6 +252,9 @@ class CalculationCubit extends Cubit<CalculationState> {
         answer: result,
       ));
       emit(state.copyWith(answer: result));
+      if (onClickEqual != null) {
+        onClickEqual!(result);
+      }
     } catch (e) {
       emit(state.copyWith(isError: true, error: 'Invalid format used.'));
     }
