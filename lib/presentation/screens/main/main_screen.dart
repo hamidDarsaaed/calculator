@@ -123,6 +123,15 @@ class _MainScreenState extends State<MainScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.close,
+                                color: Colors.black, size: 30)),
+                      ),
                       Expanded(
                         child: SingleChildScrollView(
                           controller: _scrollController,
@@ -211,7 +220,6 @@ class _MainScreenState extends State<MainScreen> {
                               //     icon: Icon(themeIcon),
                               //   ),
                               // ),
-                          
                             ],
                           ),
                         ),

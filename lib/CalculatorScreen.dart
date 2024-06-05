@@ -28,7 +28,10 @@ class CalculatorScreen extends StatelessWidget {
           historyCubit: context.read<HistoryCubit>(),
           onClickEqual: onClickEqual,
         ),
-        child: const MainScreen(),
+        child: const Directionality(
+          textDirection: TextDirection.ltr,
+          child: MainScreen(),
+        ),
       ),
     );
   }
