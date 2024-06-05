@@ -1,4 +1,4 @@
-import 'package:calculator2/presentation/designs/app_theme.dart';
+import 'package:calculator/presentation/designs/app_theme.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

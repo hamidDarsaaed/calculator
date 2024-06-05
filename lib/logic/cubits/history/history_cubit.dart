@@ -1,4 +1,4 @@
-import 'package:calculator2/data/models/calculation.dart';
+import 'package:calculator/data/models/calculation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 

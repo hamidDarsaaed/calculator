@@ -1,9 +1,9 @@
-import 'package:calculator2/data/models/calculation.dart';
-import 'package:calculator2/helpers/utils.dart';
-import 'package:calculator2/logic/cubits/calculation/calculation_cubit.dart';
-import 'package:calculator2/logic/cubits/history/history_cubit.dart';
-import 'package:calculator2/logic/cubits/theme/theme_cubit.dart';
-import 'package:calculator2/presentation/screens/profile/profile_screen.dart';
+import 'package:calculator/data/models/calculation.dart';
+import 'package:calculator/helpers/utils.dart';
+import 'package:calculator/logic/cubits/calculation/calculation_cubit.dart';
+import 'package:calculator/logic/cubits/history/history_cubit.dart';
+import 'package:calculator/logic/cubits/theme/theme_cubit.dart';
+import 'package:calculator/presentation/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

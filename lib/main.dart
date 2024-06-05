@@ -1,7 +1,7 @@
-import 'package:calculator2/config.dart';
-import 'package:calculator2/logic/cubits/history/history_cubit.dart';
-import 'package:calculator2/logic/cubits/theme/theme_cubit.dart';
-import 'package:calculator2/presentation/designs/app_theme.dart';
+import 'package:calculator/config.dart';
+import 'package:calculator/logic/cubits/history/history_cubit.dart';
+import 'package:calculator/logic/cubits/theme/theme_cubit.dart';
+import 'package:calculator/presentation/designs/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
