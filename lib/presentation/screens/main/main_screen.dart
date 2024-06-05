@@ -113,157 +113,166 @@ class _MainScreenState extends State<MainScreen> {
       },
       child: Scaffold(
         body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: Stack(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional.topStart,
-                        child: IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: const Icon(Icons.close,
-                                color: Colors.black, size: 30)),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          controller: _scrollController,
-                          child: SelectableText.rich(
-                            TextSpan(
-                              children: List<InlineSpan>.generate(
-                                question.length,
-                                (index) => TextSpan(
-                                  text: question[index],
-                                  style: TextStyle(
-                                    color: !Utils.isNumber(question[index])
-                                        ? Theme.of(context).primaryColor
-                                        : null,
-                                  ),
-                                ),
-                              ).toList(),
-                            ),
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                              fontSize: increase1
-                                  ? increase2
-                                      ? 26.0
-                                      : 28.0
-                                  : 40.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      if (answer != null)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 22.0),
-                          child: SelectableText.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: '=',
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: Utils.formatAmount(
-                                      answer.toString().length > 15
-                                          ? answer.toStringAsExponential(8)
-                                          : answer.toString()),
-                                ),
-                              ],
-                            ),
-                            textAlign: TextAlign.end,
-                            style: const TextStyle(fontSize: 32.0),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Tooltip(
-                                message: 'History',
-                                child: IconButton(
-                                  splashRadius: 20.0,
-                                  onPressed:
-                                      histories.isEmpty ? null : _showHistory,
-                                  icon: Icon(
-                                    _isHistoryVisible
-                                        ? Icons.calculate
-                                        : Icons.history,
-                                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              controller: _scrollController,
+                              child: SelectableText.rich(
+                                TextSpan(
+                                  children: List<InlineSpan>.generate(
+                                    question.length,
+                                    (index) => TextSpan(
+                                      text: question[index],
+                                      style: TextStyle(
+                                        color: !Utils.isNumber(question[index])
+                                            ? Theme.of(context).primaryColor
+                                            : null,
+                                      ),
+                                    ),
+                                  ).toList(),
+                                ),
+                                textAlign: TextAlign.end,
+                                style: TextStyle(
+                                  fontSize: increase1
+                                      ? increase2
+                                          ? 26.0
+                                          : 28.0
+                                      : 40.0,
                                 ),
                               ),
-                              // Tooltip(
-                              //   message: 'Switch Theme',
-                              //   child: IconButton(
-                              //     splashRadius: 20.0,
-                              //     onPressed: _setTheme,
-                              //     icon: Icon(themeIcon),
-                              //   ),
-                              // ),
-                            ],
+                            ),
                           ),
-                        ),
-                        Tooltip(
-                          message: 'Delete',
-                          child: IconButton(
-                            splashRadius: 20.0,
-                            disabledColor:
-                                Theme.of(context).primaryColor.withOpacity(0.4),
-                            color: Theme.of(context).primaryColor,
-                            onPressed: isInitial
-                                ? null
-                                : () =>
-                                    context.read<CalculationCubit>().onDelete(),
-                            icon: const Icon(Icons.backspace_outlined),
-                          ),
-                        ),
-                      ],
+                          if (answer != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 22.0),
+                              child: SelectableText.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: '=',
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: Utils.formatAmount(
+                                          answer.toString().length > 15
+                                              ? answer.toStringAsExponential(8)
+                                              : answer.toString()),
+                                    ),
+                                  ],
+                                ),
+                                textAlign: TextAlign.end,
+                                style: const TextStyle(fontSize: 32.0),
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
-                  const Divider(thickness: 1),
-                  Stack(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      GridView(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.all(16.0),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          mainAxisSpacing: 8.0,
-                          crossAxisSpacing: 16.0,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Tooltip(
+                                    message: 'History',
+                                    child: IconButton(
+                                      splashRadius: 20.0,
+                                      onPressed: histories.isEmpty
+                                          ? null
+                                          : _showHistory,
+                                      icon: Icon(
+                                        _isHistoryVisible
+                                            ? Icons.calculate
+                                            : Icons.history,
+                                      ),
+                                    ),
+                                  ),
+                                  // Tooltip(
+                                  //   message: 'Switch Theme',
+                                  //   child: IconButton(
+                                  //     splashRadius: 20.0,
+                                  //     onPressed: _setTheme,
+                                  //     icon: Icon(themeIcon),
+                                  //   ),
+                                  // ),
+                                ],
+                              ),
+                            ),
+                            Tooltip(
+                              message: 'Delete',
+                              child: IconButton(
+                                splashRadius: 20.0,
+                                disabledColor: Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.4),
+                                color: Theme.of(context).primaryColor,
+                                onPressed: isInitial
+                                    ? null
+                                    : () => context
+                                        .read<CalculationCubit>()
+                                        .onDelete(),
+                                icon: const Icon(Icons.backspace_outlined),
+                              ),
+                            ),
+                          ],
                         ),
-                        children: buttons
-                            .map((e) => _ButtonItem(buttonModel: e))
-                            .toList(),
                       ),
-                      Visibility(
-                        visible: _isHistoryVisible,
-                        child: _buildHistory(context, histories),
+                      const Divider(thickness: 1),
+                      Stack(
+                        children: [
+                          GridView(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.all(16.0),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              mainAxisSpacing: 8.0,
+                              crossAxisSpacing: 16.0,
+                            ),
+                            children: buttons
+                                .map((e) => _ButtonItem(buttonModel: e))
+                                .toList(),
+                          ),
+                          Visibility(
+                            visible: _isHistoryVisible,
+                            child: _buildHistory(context, histories),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ],
+              ),
+              Align(
+                alignment: AlignmentDirectional.topStart,
+                
+                child: IconButton(
+                  padding: EdgeInsets.all(10),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon:
+                        const Icon(Icons.arrow_back, color: Colors.black, size: 30)),
               ),
             ],
           ),
