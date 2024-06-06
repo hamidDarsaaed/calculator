@@ -81,6 +81,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isRtl = Localizations.localeOf(context).languageCode == "ar";
     final histories =
         context.select((HistoryCubit cubit) => cubit.state).reversed.toList();
     final calculationState =
@@ -90,9 +91,6 @@ class _MainScreenState extends State<MainScreen> {
     final increase1 = calculationState.increase1;
     final increase2 = calculationState.increase2;
     final isInitial = calculationState.isInitial;
-    final themeMode = context.select((ThemeCubit cubit) => cubit.state);
-    final themeIcon =
-        themeMode == ThemeMode.light ? Icons.brightness_4 : Icons.brightness_5;
 
     return BlocListener<CalculationCubit, CalculationState>(
       listener: (context, state) {
@@ -191,7 +189,7 @@ class _MainScreenState extends State<MainScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Tooltip(
-                              message: 'History',
+                              message: isRtl ? "سجل العمليات" : 'History',
                               child: IconButton(
                                 splashRadius: 20.0,
                                 onPressed:
@@ -232,7 +230,7 @@ class _MainScreenState extends State<MainScreen> {
                                     ),
                             ),
                             Tooltip(
-                              message: 'Delete',
+                              message: isRtl ? "حذف" : 'Delete',
                               child: IconButton(
                                 splashRadius: 20.0,
                                 disabledColor: Theme.of(context)
@@ -274,24 +272,26 @@ class _MainScreenState extends State<MainScreen> {
                         ],
                       ),
                       GestureDetector(
-                        onTap: answer == null || answer <= 0
+                        onTap: answer == null
                             ? null
                             : () {
                                 context
                                     .read<CalculationCubit>()
-                                    .clickBtnToPaymentPage();
-                                Navigator.pop(context);
+                                    .clickBtnToPaymentPage(context);
+                                
                               },
                         child: Container(
-                          color: answer == null || answer <= 0
+                          color: answer == null
                               ? const Color.fromARGB(255, 16, 71, 17)
                                   .withOpacity(.3)
                               : Colors.green,
                           height: 60,
                           alignment: AlignmentDirectional.center,
-                          child: const Text(
-                            "Proceed to payment page",
-                            style: TextStyle(
+                          child: Text(
+                            isRtl
+                                ? "انتقل إلى صفحة الدفع"
+                                : "Proceed to payment page",
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700),

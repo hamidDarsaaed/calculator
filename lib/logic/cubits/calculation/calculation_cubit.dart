@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:calculator/data/models/calculation.dart';
 import 'package:calculator/helpers/utils.dart';
 import 'package:calculator/logic/cubits/history/history_cubit.dart';
@@ -18,9 +20,31 @@ class CalculationCubit extends Cubit<CalculationState> {
   })  : _historyCubit = historyCubit,
         super(const CalculationState());
 
-  void clickBtnToPaymentPage() {
+  void clickBtnToPaymentPage(BuildContext cxt) {
+    bool isRtl = Localizations.localeOf(cxt).languageCode == "ar";
+    log("isRtl ::: ${Localizations.localeOf(cxt).languageCode }");
+    if (state.answer! <= 0) {
+      ScaffoldMessenger.of(cxt).showSnackBar(
+        SnackBar(
+            content: Text(isRtl
+                ? "يجب أن يكون المبلغ أكبر من الصفر."
+                : 'The amount must be higher than zero.')),
+      );
+      return;
+    }
+    if (state.answer!.toString().contains(".")) {
+      ScaffoldMessenger.of(cxt).showSnackBar(
+        SnackBar(
+            content: Text(isRtl
+                ? "يجب أن يكون المبلغ عددًا صحيحًا بدون فاصلة ."
+                : "The amount must be an integer without decimals.")),
+      );
+      return;
+    }
+
     if (onClickEqual != null) {
       onClickEqual!(state.answer);
+      Navigator.pop(cxt);
     }
   }
 
