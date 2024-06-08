@@ -96,7 +96,7 @@ class _MainScreenState extends State<MainScreen> {
 
     return BlocListener<CalculationCubit, CalculationState>(
       listener: (context, state) {
-        log("${answer}");
+        // log("${answer}");
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
           duration: const Duration(milliseconds: 500),
@@ -218,12 +218,10 @@ class _MainScreenState extends State<MainScreen> {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: Utils.formatAmount(answer
-                                                        .toString()
-                                                        .length >
-                                                    15
-                                                ? answer.toStringAsFixed(8)
-                                                : answer.toString()),
+                                            text: Utils.formatAmount(
+                                                answer.toString().length > 15
+                                                    ? answer.toStringAsFixed(8)
+                                                    : answer.toString()),
                                           ),
                                         ],
                                       ),
@@ -280,7 +278,6 @@ class _MainScreenState extends State<MainScreen> {
                                 context
                                     .read<CalculationCubit>()
                                     .clickBtnToPaymentPage(context);
-                                
                               },
                         child: Container(
                           color: answer == null

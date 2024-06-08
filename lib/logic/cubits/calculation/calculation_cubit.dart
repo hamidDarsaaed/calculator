@@ -264,7 +264,7 @@ class CalculationCubit extends Cubit<CalculationState> {
       num? result = Parser()
           .parse(question)
           .evaluate(EvaluationType.REAL, ContextModel());
-      log("####### $result");
+      // log("####### $result");
       final bool isDouble = result != result?.toInt();
       if (!isDouble) {
         result = result?.toInt();
