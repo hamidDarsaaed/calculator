@@ -22,22 +22,13 @@ class CalculationCubit extends Cubit<CalculationState> {
 
   void clickBtnToPaymentPage(BuildContext cxt) {
     bool isRtl = Localizations.localeOf(cxt).languageCode == "ar";
-    log("isRtl ::: ${Localizations.localeOf(cxt).languageCode }");
+    // log("isRtl ::: ${Localizations.localeOf(cxt).languageCode}");
     if (state.answer! <= 0) {
       ScaffoldMessenger.of(cxt).showSnackBar(
         SnackBar(
             content: Text(isRtl
                 ? "يجب أن يكون المبلغ أكبر من الصفر."
                 : 'The amount must be higher than zero.')),
-      );
-      return;
-    }
-    if (state.answer!.toString().contains(".")) {
-      ScaffoldMessenger.of(cxt).showSnackBar(
-        SnackBar(
-            content: Text(isRtl
-                ? "يجب أن يكون المبلغ عددًا صحيحًا بدون فاصلة ."
-                : "The amount must be an integer without decimals.")),
       );
       return;
     }
@@ -273,8 +264,8 @@ class CalculationCubit extends Cubit<CalculationState> {
       num? result = Parser()
           .parse(question)
           .evaluate(EvaluationType.REAL, ContextModel());
-      final resultString = result.toString();
-      bool isDouble = resultString[resultString.lastIndexOf('.') + 1] != '0';
+      log("####### $result");
+      final bool isDouble = result != result?.toInt();
       if (!isDouble) {
         result = result?.toInt();
       }

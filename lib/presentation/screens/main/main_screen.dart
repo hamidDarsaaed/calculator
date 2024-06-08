@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:calculator/data/models/calculation.dart';
 import 'package:calculator/helpers/utils.dart';
 import 'package:calculator/logic/cubits/calculation/calculation_cubit.dart';
@@ -94,6 +96,7 @@ class _MainScreenState extends State<MainScreen> {
 
     return BlocListener<CalculationCubit, CalculationState>(
       listener: (context, state) {
+        log("${answer}");
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
           duration: const Duration(milliseconds: 500),
@@ -219,8 +222,7 @@ class _MainScreenState extends State<MainScreen> {
                                                         .toString()
                                                         .length >
                                                     15
-                                                ? answer
-                                                    .toStringAsExponential(8)
+                                                ? answer.toStringAsFixed(8)
                                                 : answer.toString()),
                                           ),
                                         ],
@@ -349,7 +351,7 @@ class _MainScreenState extends State<MainScreen> {
                 final answer = calculcation.answer;
                 final answerString = answer != null
                     ? answer.toString().length > 15
-                        ? answer.toStringAsExponential(8)
+                        ? answer.toStringAsFixed(8)
                         : answer.toString()
                     : null;
 
