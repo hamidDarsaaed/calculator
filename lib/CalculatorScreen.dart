@@ -10,7 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CalculatorScreen extends StatelessWidget {
   Function(num?)? onClickEqual;
-  CalculatorScreen({super.key, this.onClickEqual});
+  Locale? locale;
+  CalculatorScreen({super.key, this.onClickEqual, this.locale});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class CalculatorScreen extends StatelessWidget {
         create: (context) => CalculationCubit(
           historyCubit: context.read<HistoryCubit>(),
           onClickEqual: onClickEqual,
+          locale :locale
         ),
         child: const Directionality(
           textDirection: TextDirection.ltr,

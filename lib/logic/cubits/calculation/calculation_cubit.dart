@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:calculator/data/models/calculation.dart';
 import 'package:calculator/helpers/utils.dart';
 import 'package:calculator/logic/cubits/history/history_cubit.dart';
@@ -12,17 +10,18 @@ part 'calculation_state.dart';
 
 class CalculationCubit extends Cubit<CalculationState> {
   final HistoryCubit _historyCubit;
+  Locale? locale;
   Function(num?)? onClickEqual;
 
   CalculationCubit({
     required HistoryCubit historyCubit,
     this.onClickEqual,
+    this.locale,
   })  : _historyCubit = historyCubit,
         super(const CalculationState());
 
   void clickBtnToPaymentPage(BuildContext cxt) {
-    bool isRtl = Localizations.localeOf(cxt).languageCode == "ar";
-    // log("isRtl ::: ${Localizations.localeOf(cxt).languageCode}");
+    bool isRtl = locale?.languageCode == "ar";
     if (state.answer! <= 0) {
       ScaffoldMessenger.of(cxt).showSnackBar(
         SnackBar(

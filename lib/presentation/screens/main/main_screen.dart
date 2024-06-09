@@ -83,7 +83,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isRtl = Localizations.localeOf(context).languageCode == "ar";
+    bool isRtl = context.read<CalculationCubit>().locale?.languageCode == "ar";
     final histories =
         context.select((HistoryCubit cubit) => cubit.state).reversed.toList();
     final calculationState =
