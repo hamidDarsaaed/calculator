@@ -1,17 +1,23 @@
-import 'package:calculator/config.dart';
 import 'package:calculator/logic/cubits/calculation/calculation_cubit.dart';
 import 'package:calculator/logic/cubits/history/history_cubit.dart';
 import 'package:calculator/logic/cubits/theme/theme_cubit.dart';
-import 'package:calculator/presentation/components/custom_scroll_behavior.dart';
-import 'package:calculator/presentation/designs/app_theme.dart';
 import 'package:calculator/presentation/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ignore: must_be_immutable
 class CalculatorScreen extends StatelessWidget {
   Function(num?)? onClickEqual;
   Locale? locale;
-  CalculatorScreen({super.key, this.onClickEqual, this.locale});
+  String? titleBtnClick;
+  Color? colorBtn;
+  CalculatorScreen({
+    super.key,
+    this.onClickEqual,
+    this.locale,
+    this.titleBtnClick,
+    this.colorBtn,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +32,9 @@ class CalculatorScreen extends StatelessWidget {
       ],
       child: BlocProvider<CalculationCubit>(
         create: (context) => CalculationCubit(
-          historyCubit: context.read<HistoryCubit>(),
-          onClickEqual: onClickEqual,
-          locale :locale
-        ),
+            historyCubit: context.read<HistoryCubit>(),
+            onClickEqual: onClickEqual,
+            locale: locale),
         child: const Directionality(
           textDirection: TextDirection.ltr,
           child: MainScreen(),

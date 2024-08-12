@@ -12,11 +12,15 @@ class CalculationCubit extends Cubit<CalculationState> {
   final HistoryCubit _historyCubit;
   Locale? locale;
   Function(num?)? onClickEqual;
+  String? titleBtnClick;
+  Color? colorBtn;
 
   CalculationCubit({
     required HistoryCubit historyCubit,
     this.onClickEqual,
     this.locale,
+    this.titleBtnClick,
+    this.colorBtn,
   })  : _historyCubit = historyCubit,
         super(const CalculationState());
 
@@ -26,8 +30,8 @@ class CalculationCubit extends Cubit<CalculationState> {
       ScaffoldMessenger.of(cxt).showSnackBar(
         SnackBar(
             content: Text(isRtl
-                ? "يجب أن يكون المبلغ أكبر من الصفر."
-                : 'The amount must be higher than zero.')),
+                ? "يجب أن يكون الرقم أعلى من الصفر"
+                : 'The number must be higher than zero.')),
       );
       return;
     }

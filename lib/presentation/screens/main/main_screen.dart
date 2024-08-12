@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:calculator/data/models/calculation.dart';
 import 'package:calculator/helpers/utils.dart';
 import 'package:calculator/logic/cubits/calculation/calculation_cubit.dart';
 import 'package:calculator/logic/cubits/history/history_cubit.dart';
 import 'package:calculator/logic/cubits/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ButtonModel {
@@ -283,13 +280,17 @@ class _MainScreenState extends State<MainScreen> {
                           color: answer == null
                               ? const Color.fromARGB(255, 16, 71, 17)
                                   .withOpacity(.3)
-                              : Colors.green,
+                              : (context.read<CalculationCubit>().colorBtn ??
+                                  Colors.green),
                           height: 60,
                           alignment: AlignmentDirectional.center,
                           child: Text(
-                            isRtl
-                                ? "انتقل إلى صفحة الدفع"
-                                : "Proceed to payment page",
+                            context.read<CalculationCubit>().titleBtnClick !=
+                                    null
+                                ? "${context.read<CalculationCubit>().titleBtnClick}"
+                                : (isRtl
+                                    ? "انتقل إلى صفحة الدفع"
+                                    : "Proceed to payment page"),
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:calculator/CalculatorScreen.dart';
 import 'package:calculator/initialize.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +9,7 @@ Future<void> main() async {
   runApp(MaterialApp(
     locale: Locale("ar"),
     home: CalculatorScreen(
-      onClickEqual: (val) {
-      },
+      onClickEqual: (val) {},
     ),
   ));
 }
