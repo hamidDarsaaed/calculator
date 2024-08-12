@@ -34,6 +34,8 @@ class CalculatorScreen extends StatelessWidget {
         create: (context) => CalculationCubit(
             historyCubit: context.read<HistoryCubit>(),
             onClickEqual: onClickEqual,
+            titleBtnClick: titleBtnClick,
+            colorBtn: colorBtn,
             locale: locale),
         child: const Directionality(
           textDirection: TextDirection.ltr,
