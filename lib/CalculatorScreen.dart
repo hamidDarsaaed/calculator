@@ -38,26 +38,34 @@ class CalculatorScreen extends StatelessWidget {
             titleBtnClick: titleBtnClick,
             colorBtn: colorBtn,
             locale: locale),
-        child: Focus(
-          autofocus: true,
-          onKeyEvent: (node, event) {
-            if (event is KeyDownEvent) {
-              return _handleKeyPress(
-                  context, event, context.read<CalculationCubit>());
-            }
-            return KeyEventResult.ignored;
-          },
-          child: const Directionality(
-            textDirection: TextDirection.ltr,
-            child: MainScreen(),
-          ),
-        ),
+        child: const KeyboardAwareCalculator(),
+      ),
+    );
+  }
+}
+
+class KeyboardAwareCalculator extends StatelessWidget {
+  const KeyboardAwareCalculator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Focus(
+      autofocus: true,
+      onKeyEvent: (node, event) {
+        if (event is KeyDownEvent) {
+          return _handleKeyPress(context, event);
+        }
+        return KeyEventResult.ignored;
+      },
+      child: const Directionality(
+        textDirection: TextDirection.ltr,
+        child: MainScreen(),
       ),
     );
   }
 
-  KeyEventResult _handleKeyPress(BuildContext context, KeyDownEvent event,
-      CalculationCubit calculationCubit) {
+  KeyEventResult _handleKeyPress(BuildContext context, KeyDownEvent event) {
+    final calculationCubit = context.read<CalculationCubit>();
     final key = event.logicalKey;
 
     // Numbers
