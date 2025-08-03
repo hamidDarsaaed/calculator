@@ -42,7 +42,8 @@ class CalculatorScreen extends StatelessWidget {
           autofocus: true,
           onKeyEvent: (node, event) {
             if (event is KeyDownEvent) {
-              return _handleKeyPress(context, event);
+              return _handleKeyPress(
+                  context, event, context.read<CalculationCubit>());
             }
             return KeyEventResult.ignored;
           },
@@ -55,8 +56,8 @@ class CalculatorScreen extends StatelessWidget {
     );
   }
 
-  KeyEventResult _handleKeyPress(BuildContext context, KeyDownEvent event) {
-    final calculationCubit = context.read<CalculationCubit>();
+  KeyEventResult _handleKeyPress(BuildContext context, KeyDownEvent event,
+      CalculationCubit calculationCubit) {
     final key = event.logicalKey;
 
     // Numbers
