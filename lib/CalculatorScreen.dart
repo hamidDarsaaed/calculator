@@ -134,10 +134,12 @@ class KeyboardAwareCalculator extends StatelessWidget {
         key == LogicalKeyboardKey.numpadDecimal) {
       calculationCubit.onAdd('.');
       return KeyEventResult.handled;
-    } else if (key == LogicalKeyboardKey.enter ||
-        key == LogicalKeyboardKey.numpadEnter ||
-        key == LogicalKeyboardKey.equal) {
+    } else if (key == LogicalKeyboardKey.equal) {
       calculationCubit.onEqual();
+      return KeyEventResult.handled;
+    } else if (key == LogicalKeyboardKey.enter ||
+        key == LogicalKeyboardKey.numpadEnter) {
+      calculationCubit.clickBtnToPaymentPage(context);
       return KeyEventResult.handled;
     } else if (key == LogicalKeyboardKey.backspace) {
       calculationCubit.onDelete();
